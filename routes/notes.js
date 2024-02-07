@@ -9,15 +9,13 @@ notes.get("/", (req, res) => {
 
 // POST route for a new note
 notes.post("/", (req, res) => {
-  console.log(req.body);
-
   const { title, text } = req.body;
 
   if (req.body) {
     const newNote = {
       title,
       text,
-      note_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNote, "./db/db.json");
@@ -25,6 +23,23 @@ notes.post("/", (req, res) => {
   } else {
     res.error("Error in adding note");
   }
+});
+
+// DELETE route for a specific note
+notes.delete("/:id", (req, res) => {
+  const noteId = req.params.note_id;
+  readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      // Make a new array of all notes except the one with the ID provided in the URL
+      const result = json.filter((note) => note.note_id !== noteId);
+
+      // Save that array to the filesystem
+      writeToFile("./db/db.json", result);
+
+      // Respond to the DELETE request
+      res.json(`Item ${noteId} has been deleted 🗑️`);
+    });
 });
 
 module.exports = notes;
