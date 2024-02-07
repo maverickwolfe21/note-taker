@@ -1,1 +1,12 @@
-[]
+[
+    {
+        "title": "Mav's notes",
+        "text": "test",
+        "id": "cb7e1327-5804-4343-a883-90aedceeff62"
+    },
+    {
+        "title": "test",
+        "text": "this is a test",
+        "id": "98e53d3d-7e7d-42ea-8352-1ace4567837e"
+    }
+]
