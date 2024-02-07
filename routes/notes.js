@@ -20,7 +20,7 @@ notes.post("/", (req, res) => {
       note_id: uuidv4(),
     };
 
-    readAndAppend(newNote, "./db/notes.json");
+    readAndAppend(newNote, "./db/db.json");
     res.json(`Note added successfully`);
   } else {
     res.error("Error in adding note");
